@@ -1,0 +1,65 @@
+from tkinter import *
+from random import randint
+from tkinter import ttk
+root = Tk()
+root.title("ROCK-PAPER-SCISSORS")
+
+rock = PhotoImage(file='/Users/rhidhanya/Downloads/rock.png')
+paper = PhotoImage(file='/Users/rhidhanya/Downloads/paper2.png')
+scissors = PhotoImage(file='/Users/rhidhanya/Downloads/scissors.png')
+
+number = randint(0,2)
+
+image_list=[rock, paper, scissors]
+
+label_image = Label(root, image=image_list[number])
+label_image.pack(padx=20, pady=20)
+
+def spin():
+    number = randint(0, 2)
+    label_image.config(image=image_list[number])
+
+    if user_choice.get() == "Rock":
+        user_choice_value = 0
+    elif user_choice.get() == "Paper":
+        user_choice_value = 1
+    elif user_choice.get() == "Scissors":
+        user_choice_value = 2
+
+    if user_choice_value == 0:
+        if number ==0:
+            win_lose_label.config(text= "It's a Tie!")
+        elif number == 1:
+            win_lose_label.config(text="paper wins!")
+        elif number == 2:
+            win_lose_label.config(text="Rock wins!")
+
+    if user_choice_value == 1:
+        if number ==0:
+            win_lose_label.config(text= "paper wins!")
+        elif number == 1:
+            win_lose_label.config(text="It's a Tie!")
+        elif number == 2:
+            win_lose_label.config(text="Scissors win!")
+
+    if user_choice_value == 2:
+        if number ==0:
+            win_lose_label.config(text= "Rock wins")
+        elif number == 1:
+            win_lose_label.config(text="Scissors win")
+        elif number == 2:
+            win_lose_label.config(text="It's a Tie!")
+
+
+
+button1 = Button(root, text="SPIN", command=spin)
+button1.pack(padx=14, pady=10)
+
+user_choice = ttk.Combobox(root, value=("Rock", "Paper", "Scissors"))
+user_choice.current(0)
+user_choice.pack(padx=14, pady=10)
+
+win_lose_label = Label(root, text="", font=("Aerial"))
+win_lose_label.pack(padx=14, pady=10)
+
+root.mainloop()
